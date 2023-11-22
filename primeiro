@@ -1,3 +1,4 @@
+//ultima edição 22/11 00h00
 #include <VarSpeedServo.h>  //biblioteca para controle da velocidade e da posição dos servos
 
 //servos
@@ -96,22 +97,18 @@ void executeCommand(char command) {
         break;
 
         case CIRCLE:
-          // Perform action for circle
           Serial.println("gordo");
         break;
 
         case CROSS:
-          // Perform action for immediate stop or crossing
           Serial.println("X");
         break;
 
         case TRIANGLE:
-          // Perform action for toggling a state (e.g., LED on/off)
           Serial.println("triangulo");
         break;
 
         case SQUARE:
-          // Perform action for retrieving and sending status information
           Serial.println("caixinha");
         break;
 
