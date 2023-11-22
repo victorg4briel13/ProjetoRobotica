@@ -1,4 +1,4 @@
-//ultima edição 22/11 00h00
+//ultima edição 22/11 00h06
 #include <VarSpeedServo.h>  //biblioteca para controle da velocidade e da posição dos servos
 
 //servos
@@ -197,3 +197,6 @@ void direita(){
   analogWrite(M1, vel); //O motor 1 fica ligado
   analogWrite(M2, vel); // O motor 2 desliga, fazendo assim o carrinho virar no outro sentido
 }
+
+void abrirGarra(){}
+void fechaGarra(){}
