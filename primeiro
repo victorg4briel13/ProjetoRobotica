@@ -1,0 +1,258 @@
+#include <VarSpeedServo.h>  //biblioteca para controle da velocidade e da posição dos servos
+
+#define servoBase A0
+#define servoAltura A1
+#define servoAngulo A2
+#define servoGarra A3
+
+const int velocidade = 25;
+
+#define pot1 A5
+#define pot2 A4
+
+//Instanciação dos Objetos de Controle dos Servos
+VarSpeedServo base;
+VarSpeedServo altura;
+VarSpeedServo angulo;
+VarSpeedServo garra;
+
+//Variaveis para cálculo dos angulos
+int leitura1;
+int valor1;
+int leitura2;
+int valor2;
+
+void pegar();
+void sair();
+void soltar();
+
+void setup() {
+
+  Serial.begin(9600);
+
+  //Configuração das Portas dos Servos
+  base.attach(servoBase);
+  altura.attach(servoAltura);
+  angulo.attach(servoAngulo);
+  garra.attach(servoGarra);
+
+
+  // home
+  base.slowmove(115, velocidade);
+  base.wait();
+  altura.slowmove(101, velocidade);
+  altura.wait();
+  angulo.slowmove(36, velocidade);
+  angulo.wait();
+  garra.slowmove(5, velocidade);
+  garra.wait();
+
+  delay(2000);
+
+}
+
+void loop() {
+
+  pegar();
+
+  delay(2000);
+
+  sair();
+
+  delay(2000);
+
+  soltar(1);
+
+  soltar(2);
+
+  soltar(3);
+
+  
+
+
+
+
+
+
+
+  leitura1 = analogRead(pot1);              
+  valor1 = map(leitura1, 0, 1023, 0, 180);  
+  altura.slowmove(valor1, velocidade);   
+
+  Serial.print("valor1: ");
+  Serial.println(valor1);
+
+
+  leitura2 = analogRead(pot2);              
+  valor2 = map(leitura2, 0, 1023, 0, 180);  
+  angulo.slowmove(valor2, velocidade);   
+
+  Serial.print("valor2: ");
+  Serial.println(valor2);
+
+
+  */
+  leitura1_altura = analogRead(pot1Altura);               //Leitura1 do Angulo do pot1enciometro
+  valor1_altura = map(leitura1_altura, 0, 1023, 180, 0);  //Conversão do valor1 do pot1enciometro (de 0 até 1024) para o angulo (de 0 até 180)
+  altura.slowmove(valor1_altura, 40);                    //envio do ângulo para o servo
+  
+  leitura1_angulo = analogRead(pot1Angulo);               //Leitura1 do Angulo do pot1enciometro
+  valor1_angulo = map(leitura1_angulo, 0, 1023, 180, 0);  //Conversão do valor1 do pot1enciometro (de 0 até 1024) para o angulo (de 0 até 180)
+  angulo.slowmove(valor1_angulo, 40);                    //Envio do angulo para o Servo
+  
+  leitura1_garra = analogRead(pot1Garra);              //Leitura1 do Angulo do pot1enciometro
+  valor1_garra = map(leitura1_garra, 0, 1023, 0, 80);  //Conversão do valor1 do pot1enciometro (de 0 até 1024) para o angulo (de 0 até 180)
+  garra.slowmove(valor1_garra, 40);                   //envio do ângulo para o servo
+  
+
+  while (true) {
+    delay(50000);
+  }
+}
+
+void pegar(){
+  base.slowmove(6, velocidade);
+  base.wait();
+  delay(700);
+
+  altura.slowmove(82, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(61, velocidade);
+  angulo.wait();
+  delay(700);
+
+  garra.slowmove(78, velocidade); // garra
+  garra.wait();
+  delay(700);
+
+  angulo.slowmove(72, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(90, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(100, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(100, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(115, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(106, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(122, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(112, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(136, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(118, velocidade);
+  altura.wait();
+  delay(700);
+
+  garra.slowmove(28, velocidade); // garra
+  garra.wait();
+  delay(700);
+}
+
+void sair(){
+  angulo.slowmove(125, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(116, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(117, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(108, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(101, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(98, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(70, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(90, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(61, velocidade);
+  angulo.wait();
+  delay(700);
+  
+  altura.slowmove(82, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(36, velocidade);
+  angulo.wait();
+  delay(700);
+}
+
+void soltar(int posicao){
+  int valor;
+  if (posicao == 1){
+    valor = 55;
+  } else if (posicao == 2){
+    valor = 115;
+  } else {
+    valor = 179;
+  }
+
+  base.slowmove(valor, velocidade);
+  base.wait();
+  delay(700);
+
+  altura.slowmove(118, velocidade);
+  altura.wait();
+  delay(700);
+
+  angulo.slowmove(112, velocidade);
+  angulo.wait();
+  delay(700);
+
+  garra.slowmove(78, velocidade); // garra
+  garra.wait();
+  delay(700);
+
+  garra.slowmove(5, velocidade); // garra
+  garra.wait();
+  delay(700);
+
+  angulo.slowmove(36, velocidade);
+  angulo.wait();
+  delay(700);
+
+  altura.slowmove(82, velocidade);
+  altura.wait();
+  delay(700);
+}
